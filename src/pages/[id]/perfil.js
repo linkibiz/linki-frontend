@@ -28,19 +28,18 @@ const Perfil = ({data, socialLinks, description}) => {
 };
 
 
-export async function getServerSideProps() {
-
-  const url = 'http://localhost:1337/api/asegurados/4?populate=deep'
+export async function getServerSideProps({query: {id} }) {
+  const url = `http://localhost:1337/api/asegurados?filters[RandomID][$eq]=${id}&populate=deep`;
   const req = await fetch(url)
   const res = await req.json()
-  const data = res.data.attributes
+  const data = res.data[0].attributes
   const socialLinks = data.perfil.data.attributes.redes_sociales
   const description = data.perfil.data.attributes.description
   return {
     props: {
       data,
       socialLinks,
-      description
+      description,
     }, // will be passed to the page component as props
   }
 }
