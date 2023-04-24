@@ -29,7 +29,7 @@ const Perfil = ({data, socialLinks, description}) => {
 
 
 export async function getServerSideProps({query: {id} }) {
-  const url = `http://localhost:1337/api/asegurados?filters[RandomID][$eq]=${id}&populate=deep`;
+  const url = `${process.env.API_URL}/api/asegurados?filters[RandomID][$eq]=${id}&populate=deep`;
   const req = await fetch(url)
   const res = await req.json()
   const data = res.data[0].attributes

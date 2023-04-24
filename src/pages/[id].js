@@ -22,7 +22,7 @@ export default function Home({data}) {
 
 export async function getServerSideProps({query: {id}}) {
   // api/asegurados/?filters[RandomID][$eq]=${id}&populate[1]=Seguros.PDF&populate=*
-  const url = `http://localhost:1337/api/asegurados?filters[RandomID][$eq]=${id}&populate=deep`
+  const url = `${process.env.API_URL}/api/asegurados?filters[RandomID][$eq]=${id}&populate=deep`
   const req = await fetch(url)
   const res = await req.json()
   const data = res.data

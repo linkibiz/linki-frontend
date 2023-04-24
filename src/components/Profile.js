@@ -8,7 +8,7 @@ import SocialLinks from "./SocialLinks";
 const Profile = ({data}) => {
   const {nombre, apellido,profesion, correo,numero_de_contacto,avatar } = data.perfil.data.attributes
   const fullName = `${nombre} ${apellido}`
-  const src = `http://localhost:1337${avatar.data.attributes.url}`
+  const src = `${process.env.API_URL}${avatar.data.attributes.url}`
 
   return (
     <>
