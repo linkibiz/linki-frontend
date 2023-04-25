@@ -12,10 +12,10 @@ import { useState, useEffect } from "react";
 import Pin from "@/components/pin";
 import { useAuth } from "@/context/theme";
 
-const Poliza = ({ data }) => {
+const Poliza = ({ data, res }) => {
   const router = useRouter();
   const {auth} = useAuth()
-  console.log(auth)
+  console.log(res)
   const {
     attributes: { id, nombre, apellido, correo, fecha_de_nacimiento, seguros },
   } = data;
@@ -109,10 +109,12 @@ export async function getServerSideProps({ query: { id } }) {
   const url = `${process.env.API_URL}/api/asegurados?filters[RandomID][$eq]=${id}&populate=deep`;
   const req = await fetch(url);
   const res = await req.json();
+  console.log(res)
   const data = res.data[0];
   return {
     props: {
       data,
+      res
     },
   };
 }
